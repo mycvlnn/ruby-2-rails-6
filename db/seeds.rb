@@ -1,18 +1,15 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
+# Authors
+author1 = Author.create!(name: "J.K. Rowling", bio: "Author of Harry Potter")
+author2 = Author.create!(name: "George R.R. Martin", bio: "Author of Game of Thrones")
 
-# Xóa dữ liệu cũ
-Order.delete_all
+# Books
+book1 = Book.create!(title: "Harry Potter", price: 10.5, author: author1)
+book2 = Book.create!(title: "Game of Thrones", price: 15.0, author: author2)
 
-# Tạo dữ liệu demo
-Order.create!(status: "being_packed", total: 100, created_at: "2025-08-20")
-Order.create!(status: "being_packed", total: 150, created_at: "2025-08-20")
-Order.create!(status: "shipped", total: 250, created_at: "2025-08-21")
-Order.create!(status: "shipped", total: 300, created_at: "2025-08-21")
-Order.create!(status: "shipped", total: 500, created_at: "2025-08-22")
+# Customers
+customer1 = Customer.create!(name: "Alice", email: "alice@example.com")
+customer2 = Customer.create!(name: "Bob", email: "bob@example.com")
 
+# Orders
+Order.create!(customer: customer1, book: book1, quantity: 2)
+Order.create!(customer: customer2, book: book2, quantity: 1)

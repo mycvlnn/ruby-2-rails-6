@@ -1,11 +1,9 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  customer: one
-  book: one
-  quantity: 1
+  name: MyString
+  bio: MyText
 
 two:
-  customer: two
-  book: two
-  quantity: 1
+  name: MyString
+  bio: MyText

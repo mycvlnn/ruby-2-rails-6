@@ -10,29 +10,42 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2025_08_26_040417) do
+ActiveRecord::Schema.define(version: 2025_08_26_163312) do
+
+  create_table "authors", force: :cascade do |t|
+    t.string "name"
+    t.text "bio"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "books", force: :cascade do |t|
     t.string "title"
-    t.string "author"
+    t.decimal "price"
+    t.integer "author_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "priority"
+    t.index ["author_id"], name: "index_books_on_author_id"
   end
 
   create_table "customers", force: :cascade do |t|
     t.string "name"
-    t.integer "orders_count"
-    t.string "nullable_country"
+    t.string "email"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "orders", force: :cascade do |t|
-    t.string "status"
-    t.integer "total"
+    t.integer "customer_id", null: false
+    t.integer "book_id", null: false
+    t.integer "quantity"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["book_id"], name: "index_orders_on_book_id"
+    t.index ["customer_id"], name: "index_orders_on_customer_id"
   end
 
+  add_foreign_key "books", "authors"
+  add_foreign_key "orders", "books"
+  add_foreign_key "orders", "customers"
 end
