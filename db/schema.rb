@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2025_09_02_151829) do
+ActiveRecord::Schema.define(version: 2025_09_05_052220) do
 
   create_table "authors", force: :cascade do |t|
     t.string "name"
@@ -41,6 +41,8 @@ ActiveRecord::Schema.define(version: 2025_09_02_151829) do
     t.string "first_name"
     t.string "last_name"
     t.integer "age"
+    t.integer "status", default: 0, null: false
+    t.index ["status"], name: "index_customers_on_status"
   end
 
   create_table "orders", force: :cascade do |t|
