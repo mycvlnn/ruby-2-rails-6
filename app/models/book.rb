@@ -12,4 +12,6 @@ class Book < ApplicationRecord
   scope :recent, -> { where(year_published: 10.years.ago.year..) }
   scope :in_print, -> { where(out_of_print: false) }
   scope :out_of_print, -> { where(out_of_print: true) }
+
+  validates :title, presence: true
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2025_09_05_052220) do
+ActiveRecord::Schema.define(version: 2025_09_05_083746) do
 
   create_table "authors", force: :cascade do |t|
     t.string "name"
@@ -31,6 +31,7 @@ ActiveRecord::Schema.define(version: 2025_09_05_052220) do
     t.boolean "out_of_print", default: false, null: false
     t.integer "year_published"
     t.index ["author_id"], name: "index_books_on_author_id"
+    t.index ["created_at"], name: "index_books_on_created_at"
   end
 
   create_table "customers", force: :cascade do |t|
