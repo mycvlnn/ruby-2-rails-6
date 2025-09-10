@@ -1,19 +1,26 @@
-# Xóa dữ liệu cũ (cho dễ chạy thử nhiều lần)
-Account.delete_all
-Supplier.delete_all
+# Xoá dữ liệu cũ (cho dễ chạy nhiều lần)
+Document.delete_all
+Section.delete_all
+Paragraph.delete_all
 
-# Tạo suppliers
-suppliers = Supplier.create!([
-  { name: "ACME Corp" },
-  { name: "Global Supplies" },
-  { name: "Tech World" }
-])
+# Tạo dữ liệu mẫu
+doc1 = Document.create!(name: "Document 1")
+doc2 = Document.create!(name: "Document 2")
+doc3 = Document.create!(name: "Document 3")
 
-# Tạo accounts cho mỗi supplier
-suppliers.each_with_index do |supplier, i|
-  supplier.create_account!(
-    account_number: "ACC-#{1000 + i}"
-  )
-end
+# Tạo sections
+sec1 = Section.create!(name: "Section 1 of Doc 1", document: doc1)
+sec2 = Section.create!(name: "Section 2 of Doc 1", document: doc1)
+sec3 = Section.create!(name: "Section 1 of Doc 2", document: doc2)
+sec4 = Section.create!(name: "Section 1 of Doc 3", document: doc3)
 
-puts "Seeded #{Supplier.count} suppliers and #{Account.count} accounts"
+# Tạo paragraphs
+Paragraph.create!(name: "Paragraph 1 of Section 1 of Doc 1", section: sec1)
+Paragraph.create!(name: "Paragraph 2 of Section 1 of Doc 1", section: sec1)
+Paragraph.create!(name: "Paragraph 1 of Section 2 of Doc 1", section: sec2)
+Paragraph.create!(name: "Paragraph 1 of Section 1 of Doc 2", section: sec3)
+Paragraph.create!(name: "Paragraph 1 of Section 1 of Doc 3", section: sec4)
+Paragraph.create!(name: "Paragraph 2 of Section 1 of Doc 3", section: sec4)
+Paragraph.create!(name: "Paragraph 3 of Section 1 of Doc 3", section: sec4)
+
+puts "Seeded #{Document.count} documents, #{Section.count} sections, and #{Paragraph.count} paragraphs."
