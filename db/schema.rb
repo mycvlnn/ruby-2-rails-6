@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2025_09_10_153818) do
+ActiveRecord::Schema.define(version: 2025_09_11_151156) do
 
   create_table "account_histories", force: :cascade do |t|
     t.integer "account_id"
@@ -36,6 +36,22 @@ ActiveRecord::Schema.define(version: 2025_09_10_153818) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["patient_id"], name: "index_appointments_on_patient_id"
     t.index ["physician_id"], name: "index_appointments_on_physician_id"
+  end
+
+  create_table "assemblies", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "assemblies_parts", id: false, force: :cascade do |t|
+    t.integer "assembly_id", null: false
+    t.integer "part_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["assembly_id", "part_id"], name: "index_assemblies_parts_on_assembly_id_and_part_id", unique: true
+    t.index ["assembly_id"], name: "index_assemblies_parts_on_assembly_id"
+    t.index ["part_id"], name: "index_assemblies_parts_on_part_id"
   end
 
   create_table "authors", force: :cascade do |t|
@@ -97,6 +113,12 @@ ActiveRecord::Schema.define(version: 2025_09_10_153818) do
     t.index ["section_id"], name: "index_paragraphs_on_section_id"
   end
 
+  create_table "parts", force: :cascade do |t|
+    t.string "part_number"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "patients", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
@@ -137,6 +159,8 @@ ActiveRecord::Schema.define(version: 2025_09_10_153818) do
   add_foreign_key "accounts", "suppliers"
   add_foreign_key "appointments", "patients"
   add_foreign_key "appointments", "physicians"
+  add_foreign_key "assemblies_parts", "assemblies"
+  add_foreign_key "assemblies_parts", "parts"
   add_foreign_key "books", "authors"
   add_foreign_key "orders", "books"
   add_foreign_key "orders", "customers"
