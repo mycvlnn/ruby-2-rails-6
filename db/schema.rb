@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2025_09_13_100431) do
+ActiveRecord::Schema.define(version: 2025_09_13_151021) do
 
   create_table "account_histories", force: :cascade do |t|
     t.integer "account_id"
@@ -76,6 +76,12 @@ ActiveRecord::Schema.define(version: 2025_09_13_100431) do
     t.index ["created_at"], name: "index_books_on_created_at"
   end
 
+  create_table "courses", force: :cascade do |t|
+    t.string "title", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "customers", force: :cascade do |t|
     t.string "name"
     t.string "email"
@@ -98,6 +104,18 @@ ActiveRecord::Schema.define(version: 2025_09_13_100431) do
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "enrollments", force: :cascade do |t|
+    t.integer "student_id", null: false
+    t.integer "course_id", null: false
+    t.date "enrolled_on"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.decimal "grade"
+    t.index ["course_id"], name: "index_enrollments_on_course_id"
+    t.index ["student_id", "course_id"], name: "index_enrollments_on_student_id_and_course_id", unique: true
+    t.index ["student_id"], name: "index_enrollments_on_student_id"
   end
 
   create_table "orders", force: :cascade do |t|
@@ -172,6 +190,12 @@ ActiveRecord::Schema.define(version: 2025_09_13_100431) do
     t.index ["document_id"], name: "index_sections_on_document_id"
   end
 
+  create_table "students", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "suppliers", force: :cascade do |t|
     t.string "name", null: false
     t.datetime "created_at", precision: 6, null: false
@@ -184,6 +208,8 @@ ActiveRecord::Schema.define(version: 2025_09_13_100431) do
   add_foreign_key "assemblies_parts", "assemblies"
   add_foreign_key "assemblies_parts", "parts"
   add_foreign_key "books", "authors"
+  add_foreign_key "enrollments", "courses"
+  add_foreign_key "enrollments", "students"
   add_foreign_key "orders", "books"
   add_foreign_key "orders", "customers"
   add_foreign_key "paragraphs", "sections"
