@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2025_09_14_054342) do
+ActiveRecord::Schema.define(version: 2025_09_14_071356) do
 
   create_table "account_histories", force: :cascade do |t|
     t.integer "account_id"
@@ -76,6 +76,12 @@ ActiveRecord::Schema.define(version: 2025_09_14_054342) do
     t.index ["created_at"], name: "index_books_on_created_at"
   end
 
+  create_table "comments", force: :cascade do |t|
+    t.string "content"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "courses", force: :cascade do |t|
     t.string "title", null: false
     t.datetime "created_at", precision: 6, null: false
@@ -118,6 +124,21 @@ ActiveRecord::Schema.define(version: 2025_09_14_054342) do
     t.index ["course_id"], name: "index_enrollments_on_course_id"
     t.index ["student_id", "course_id"], name: "index_enrollments_on_student_id_and_course_id", unique: true
     t.index ["student_id"], name: "index_enrollments_on_student_id"
+  end
+
+  create_table "entries", force: :cascade do |t|
+    t.string "entryable_type"
+    t.integer "entryable_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "title"
+  end
+
+  create_table "messages", force: :cascade do |t|
+    t.string "subject"
+    t.string "body"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "orders", force: :cascade do |t|
