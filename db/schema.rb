@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2025_09_13_151021) do
+ActiveRecord::Schema.define(version: 2025_09_13_154924) do
 
   create_table "account_histories", force: :cascade do |t|
     t.integer "account_id"
@@ -104,6 +104,8 @@ ActiveRecord::Schema.define(version: 2025_09_13_151021) do
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "manager_id"
+    t.index ["manager_id"], name: "index_employees_on_manager_id"
   end
 
   create_table "enrollments", force: :cascade do |t|
@@ -208,6 +210,7 @@ ActiveRecord::Schema.define(version: 2025_09_13_151021) do
   add_foreign_key "assemblies_parts", "assemblies"
   add_foreign_key "assemblies_parts", "parts"
   add_foreign_key "books", "authors"
+  add_foreign_key "employees", "employees", column: "manager_id"
   add_foreign_key "enrollments", "courses"
   add_foreign_key "enrollments", "students"
   add_foreign_key "orders", "books"
