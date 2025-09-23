@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Book < ApplicationRecord
-  belongs_to :author
+  belongs_to :author, counter_cache: true
   has_many :orders
   has_many :customers, through: :orders
   has_many :reviews, dependent: :destroy

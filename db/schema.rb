@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2025_09_23_092818) do
+ActiveRecord::Schema.define(version: 2025_09_23_095800) do
 
   create_table "account_histories", force: :cascade do |t|
     t.integer "account_id"
@@ -63,6 +63,7 @@ ActiveRecord::Schema.define(version: 2025_09_23_092818) do
     t.string "first_name"
     t.string "last_name"
     t.integer "age"
+    t.integer "books_count", default: 0, null: false
   end
 
   create_table "books", force: :cascade do |t|
