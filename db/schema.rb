@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2025_09_14_071356) do
+ActiveRecord::Schema.define(version: 2025_09_23_092818) do
 
   create_table "account_histories", force: :cascade do |t|
     t.integer "account_id"
@@ -25,6 +25,7 @@ ActiveRecord::Schema.define(version: 2025_09_14_071356) do
     t.string "account_number", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "active", default: true, null: false
     t.index ["supplier_id"], name: "index_accounts_on_supplier_id", unique: true
   end
 
@@ -223,6 +224,7 @@ ActiveRecord::Schema.define(version: 2025_09_14_071356) do
     t.string "name", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "active", default: true, null: false
   end
 
   create_table "vehicles", force: :cascade do |t|
