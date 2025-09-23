@@ -6,7 +6,6 @@ class Book < ApplicationRecord
   has_many :customers, through: :orders
   has_many :reviews, dependent: :destroy
 
-  default_scope { order(created_at: :desc) }
 
   scope :costs_more_than, ->(amount) { where('price > ?', amount) if amount.present? }
   scope :recent, -> { where(year_published: 10.years.ago.year..) }
